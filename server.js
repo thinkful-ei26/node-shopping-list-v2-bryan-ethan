@@ -1,3 +1,4 @@
+/* eslint-disable strict */
 
 const express = require('express');
 const router = express.Router();
@@ -37,7 +38,7 @@ app.post('/shopping-list', jsonParser, (req, res) => {
   for (let i=0; i<requiredFields.length; i++) {
     const field = requiredFields[i];
     if (!(field in req.body)) {
-      const message = `Missing \`${field}\` in request body`
+      const message = `Missing \`${field}\` in request body`;
       console.error(message);
       return res.status(400).send(message);
     }
@@ -47,10 +48,16 @@ app.post('/shopping-list', jsonParser, (req, res) => {
   res.status(201).json(item);
 });
 
+app.post('/recipes', jsonParser, (request, response) => {
+  const requiredInput = ['item', 'receipe'];
+  for (let i = 0; i < requiredInput.length; i++) {
+    
+  }
+})
 
 app.get('/recipes', (req, res) => {
   res.json(Recipes.get());
-})
+});
 
 app.listen(process.env.PORT || 8080, () => {
   console.log(`Your app is listening on port ${process.env.PORT || 8080}`);
